@@ -72,6 +72,7 @@ class ProfileFragment: Fragment() {
 
         user.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+              if (!isAdded) return
               val userName = snapshot.child("nickname").value.toString()
               binding.usernameTv.text = userName
 

@@ -36,6 +36,7 @@ class NewChatFragment: Fragment() {
         FirebaseDatabase.getInstance().reference.child("Users").addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    val context = context ?: return
                     for(userSnapshot in snapshot.children){
                         if(userSnapshot.key == FirebaseAuth.getInstance().currentUser?.uid){
                             continue
