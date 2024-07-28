@@ -36,7 +36,7 @@ class ChatsAdapter(private val chats: ArrayList<Chat>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.chat_name_tv.text = chats[position].chatName
+
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         val userId: String
         if (chats[position].firstUserId == uid){
@@ -48,13 +48,13 @@ class ChatsAdapter(private val chats: ArrayList<Chat>) :
 
             FirebaseDatabase.getInstance().reference.child("Users")
                 .child(userId)
-                .child("profileImage")
                 .get()
                 .addOnCompleteListener {
                 task ->
                 if(task.isSuccessful){
                     try {
-                        val profileImageUrl = task.result.value.toString()
+                        holder.chat_name_tv.text = task.result.child("nickname").value.toString()
+                        val profileImageUrl = task.result.child("profileImage").value.toString()
                         if (profileImageUrl.isNotEmpty()){
                             Glide.with(holder.itemView.context)
                                 .load(profileImageUrl).into(holder.chat_iv)

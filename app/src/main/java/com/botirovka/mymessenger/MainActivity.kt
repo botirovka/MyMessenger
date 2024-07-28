@@ -17,8 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bottomNav : BottomNavigationView
-
+    private lateinit var bottomNav: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,17 +25,18 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if(FirebaseAuth.getInstance().currentUser==null){
+        if (FirebaseAuth.getInstance().currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         replaceFragment(ChatFragment())
         setupBottomNavigation()
         applyWindowInsets()
     }
+
     private fun setupBottomNavigation() {
         bottomNav = binding.bottomNav
-        bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.chats -> replaceFragment(ChatFragment())
                 R.id.newchat -> replaceFragment(NewChatFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
@@ -53,10 +53,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment): Boolean{
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(binding.fragmentContainer.id, fragment)
-        fragmentTransaction.commit()
+    fun navigateToChatFragment() {
+        bottomNav.selectedItemId = R.id.chats
+        replaceFragment(ChatFragment())
+    }
+
+    private fun replaceFragment(fragment: Fragment): Boolean {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
         return true
     }
 }

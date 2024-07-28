@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
                           FirebaseAuth.getInstance().currentUser?.uid?.let { id ->
                               val email = binding.registerActivityEditTextEmail.text.toString()
                               val username = binding.registerActivityEditTextUsername.text.toString()
-                              val user = User(email,username,"")
+                              val user = User("",email,username,"")
                               FirebaseDatabase.getInstance().reference.child("Users").child(id).setValue(user).addOnCompleteListener {
                                   if (it.isSuccessful){
                                       Toast.makeText(this, "Succesfull added to DB", Toast.LENGTH_SHORT ).show()

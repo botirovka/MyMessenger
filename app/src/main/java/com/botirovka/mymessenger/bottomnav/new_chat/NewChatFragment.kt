@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.botirovka.mymessenger.R
 import com.botirovka.mymessenger.databinding.FragmentNewChatBinding
 import com.botirovka.mymessenger.users.User
 import com.botirovka.mymessenger.users.UsersAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -41,13 +43,14 @@ class NewChatFragment: Fragment() {
                         if(userSnapshot.key == FirebaseAuth.getInstance().currentUser?.uid){
                             continue
                         }
+                        val uid = userSnapshot.key.toString()
                         val email = userSnapshot.child("email").value.toString()
                         val username = userSnapshot.child("nickname").value.toString()
                         val profileImage = userSnapshot.child("profileImage").value.toString()
 
-                        users.add(User(email,username ,profileImage))
+                        users.add(User(uid, email,username ,profileImage))
                     }
-                    val usersAdapter = UsersAdapter(users)
+                    val usersAdapter = UsersAdapter(users, this@NewChatFragment)
                     binding.usersRv.layoutManager = LinearLayoutManager(context)
                     binding.usersRv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
                     binding.usersRv.adapter = usersAdapter
