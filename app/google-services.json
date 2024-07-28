@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "923067087461",
+    "firebase_url": "https://androidmessenger-41108-default-rtdb.firebaseio.com",
+    "project_id": "androidmessenger-41108",
+    "storage_bucket": "androidmessenger-41108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923067087461:android:3bf6d5459e519d0f98a48c",
+        "android_client_info": {
+          "package_name": "com.botirovka.mymessenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1FTb94K7fSJH-gAPUU3dXzy9XDMVGl9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
