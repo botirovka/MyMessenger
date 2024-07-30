@@ -26,6 +26,7 @@ import org.checkerframework.checker.units.qual.A
 
 class ChatFragment: Fragment() {
     private lateinit var binding: FragmentChatsBinding
+      val savedChatsList = ArrayList<Chat>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +34,18 @@ class ChatFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
+        Log.d("mydebug", "onCreateViewStart")
         loadChats()
         return binding.root
     }
 
+    override fun onResume() {
+        if(savedChatsList.isNotEmpty()){
+            binding.chatsRv.layoutManager = LinearLayoutManager(context)
+            binding.chatsRv.adapter = ChatsAdapter(savedChatsList)
+        }
+        super.onResume()
+    }
 
     private fun loadChats() {
         val chatsIdForLoad = ArrayList<String>()
@@ -52,6 +61,8 @@ class ChatFragment: Fragment() {
                         chatsIdForLoad.add(chat.value.toString())
                     }
                     getChatListById(chatsIdForLoad) { chatList ->
+                        savedChatsList.clear()
+                        savedChatsList.addAll(chatList)
                         binding.chatsRv.layoutManager = LinearLayoutManager(context)
                         binding.chatsRv.adapter = ChatsAdapter(chatList)
 

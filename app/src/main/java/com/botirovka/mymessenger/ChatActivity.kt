@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.PopupMenu
 import android.widget.TextView
@@ -174,7 +175,13 @@ class ChatActivity : AppCompatActivity() {
         val text = binding.messageEt.text.toString()
         val newMessage = Message(messageId,ownerId,text,date)
 
-        newMessageRef.setValue(newMessage)
+        newMessageRef.setValue(newMessage).addOnSuccessListener {
+            FirebaseDatabase.getInstance().reference
+                .child("Chats")
+                .child(chatId)
+                .child("isNewFrom")
+                .setValue(ownerId)
+        }
         binding.messageEt.text.clear()
     }
 
@@ -193,7 +200,6 @@ class ChatActivity : AppCompatActivity() {
 
                     listOfMessages.add(
                         Message(messageId, ownerId, text, date))
-
                 }
                 binding.messagesRv.layoutManager = LinearLayoutManager(baseContext)
                 binding.messagesRv.adapter = MessagesAdapter(listOfMessages)
@@ -203,6 +209,21 @@ class ChatActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+         val isNewFromRef = FirebaseDatabase.getInstance().reference
+            .child("Chats")
+            .child(chatId)
+            .child("isNewFrom")
+
+            isNewFromRef.get().addOnSuccessListener { snapshot ->
+                val ownerId = FirebaseAuth.getInstance().currentUser?.uid ?: return@addOnSuccessListener
+
+                if (snapshot.exists() && snapshot.value.toString() != ownerId) {
+                    isNewFromRef.setValue("")
+                }
+
+
+            }
+
     }
 
     private fun applyWindowInsets(){

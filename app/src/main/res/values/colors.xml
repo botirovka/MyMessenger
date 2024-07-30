@@ -7,4 +7,5 @@
     <color name="secondary_purple">#474973</color>
     <color name="gray">#f3f3f3</color>
     <color name="red">#c44536</color>
+    <color name="transparent">#00000000</color>
 </resources>
