@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.loginActivityEditTextEmail.text.toString(),
                     binding.loginActivityEditTextPassword.text.toString()).addOnCompleteListener {
                         if(it.isSuccessful){
+                            finish()
                             startActivity(Intent(this, MainActivity::class.java))
                         }
                 }

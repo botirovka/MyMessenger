@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (FirebaseAuth.getInstance().currentUser == null) {
+            finish()
             startActivity(Intent(this, LoginActivity::class.java))
         }
         replaceFragment(ChatFragment())

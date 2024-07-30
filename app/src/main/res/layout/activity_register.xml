@@ -123,9 +123,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/primary_purple"
         android:fontFamily="@font/ubuntu_light"
         android:text="Sign Up"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_activity_linear_layout_password" />
@@ -153,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Login"
-            android:textColor="@color/blue" />
+            android:textColor="@color/primary_purple" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

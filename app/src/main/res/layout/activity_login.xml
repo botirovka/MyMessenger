@@ -14,7 +14,7 @@
         android:layout_margin="40dp"
         android:layout_marginTop="34dp"
         android:contentDescription="LOGINACTIVITYIMAGE"
-        android:src="@drawable/image1"
+        android:src="@drawable/image2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,9 +95,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/primary_purple"
         android:fontFamily="@font/ubuntu_light"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_activity_linear_layout_password" />
@@ -125,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Sign Up"
-            android:textColor="@color/blue" />
+            android:textColor="@color/primary_purple" />
 
     </LinearLayout>
 
