@@ -7,11 +7,61 @@
     android:layout_height="match_parent"
     tools:context=".ChatActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:background="@drawable/message_et_shape">
+
+        <ImageView
+            android:id="@+id/back_to_chat_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_back_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@android:color/transparent"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/person_icon"
+            android:layout_marginHorizontal="10dp"/>
+
+        <TextView
+            android:id="@+id/profile_nickname_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_medium"
+            tools:text="Username"
+            android:textSize="20sp"/>
+
+        <ImageButton
+            android:id="@+id/button_chat_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/more_vertical_icon" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messages_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/input_layout" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/input_layout"
+        android:layout_below="@+id/linearLayout"
+         />
 
     <LinearLayout
         android:id="@+id/input_layout"

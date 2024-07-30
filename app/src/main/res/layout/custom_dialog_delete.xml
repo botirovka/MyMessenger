@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:backgroundTint="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/message_from_curr_user">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dialog_profile_image_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/person_icon"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="Delete Chat"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="15dp"
+            android:text="Are you sure you want to delete this chat?"
+            android:textSize="17sp"/>
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end">
+
+        <TextView
+            android:id="@+id/cancel_delete_chat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:fontFamily="@font/ubuntu_medium"
+            android:textSize="19sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/gray" />
+
+          <TextView
+              android:id="@+id/delete_chat_tv"
+              android:padding="10dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Delete chat"
+              android:fontFamily="@font/ubuntu_medium"
+              android:textSize="19sp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginHorizontal="15dp"
+              android:textColor="@color/red" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
