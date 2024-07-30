@@ -1,11 +1,13 @@
 package com.botirovka.mymessenger.chats
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.botirovka.mymessenger.ChatActivity
 import com.botirovka.mymessenger.R
 import com.botirovka.mymessenger.users.User
 import com.bumptech.glide.Glide
@@ -64,5 +66,10 @@ class ChatsAdapter(private val chats: ArrayList<Chat>) :
                     }
                 }
             }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ChatActivity::class.java)
+            intent.putExtra("chatId", chats.get(position).chatId)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 }

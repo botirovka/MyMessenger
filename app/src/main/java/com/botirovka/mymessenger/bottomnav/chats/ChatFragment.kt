@@ -18,13 +18,14 @@ import com.botirovka.mymessenger.chats.ChatsAdapter
 import com.botirovka.mymessenger.databinding.FragmentChatsBinding
 import com.botirovka.mymessenger.users.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.checkerframework.checker.units.qual.A
 
 class ChatFragment: Fragment() {
     private lateinit var binding: FragmentChatsBinding
-    private lateinit var chatsAdapter: ChatsAdapter
-    private val chatList = ArrayList<Chat>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,24 +33,10 @@ class ChatFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
+        loadChats()
         return binding.root
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
-        loadChats()
-
-
-    }
-
-    private fun initRecyclerView() {
-        chatsAdapter = ChatsAdapter(chatList)
-        binding.chatsRv.layoutManager = LinearLayoutManager(context)
-        binding.chatsRv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        binding.chatsRv.adapter = chatsAdapter
-    }
 
     private fun loadChats() {
         val chatsIdForLoad = ArrayList<String>()
@@ -57,19 +44,26 @@ class ChatFragment: Fragment() {
 
         if(uid != null) {
             val userChatsRef = FirebaseDatabase.getInstance().reference.child("Users").child(uid).child("chats")
-            userChatsRef.get().addOnSuccessListener {snapshot ->
+            userChatsRef.addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    chatsIdForLoad.clear()
+                    if(!snapshot.exists()) return
+                    for(chat in snapshot.children){
+                        chatsIdForLoad.add(chat.value.toString())
+                    }
+                    getChatListById(chatsIdForLoad) { chatList ->
+                        binding.chatsRv.layoutManager = LinearLayoutManager(context)
+                        binding.chatsRv.adapter = ChatsAdapter(chatList)
 
-                for(chat in snapshot.children){
-                    chatsIdForLoad.add(chat.value.toString())
+
+                    }
                 }
-                getChatListById(chatsIdForLoad) { chatList ->
 
-                    this.chatList.clear()
-                    this.chatList.addAll(chatList)
-                    chatsAdapter.notifyDataSetChanged()
-
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
                 }
-            }
+
+            })
         }
     }
 
