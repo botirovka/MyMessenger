@@ -34,6 +34,7 @@ class ChatFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
+        binding.chatsRv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         Log.d("mydebug", "onCreateViewStart")
         loadChats()
         return binding.root
