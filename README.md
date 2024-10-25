@@ -1,2 +1,4 @@
 App Screenshot
-![App Screenshot](app.jpg)
+<p align="center">
+  <img src="app.jpg" alt="App Screenshot" width="300">
+</p>
